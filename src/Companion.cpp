@@ -35,7 +35,7 @@
 #include "factories/sm64/DialogFactory.h"
 #include "factories/sm64/DictionaryFactory.h"
 #include "factories/sm64/TextFactory.h"
-#include "factories/sm64/GeoLayoutFactory.h"
+// #include "factories/sm64/GeoLayoutFactory.h"
 #include "factories/sm64/LevelScriptFactory.h"
 #include "factories/sm64/MacroFactory.h"
 #include "factories/sm64/MovtexFactory.h"
@@ -102,7 +102,7 @@ void Companion::Init(const ExportType type) {
     this->RegisterFactory("SM64:ANIM", std::make_shared<SM64::AnimationFactory>());
     this->RegisterFactory("SM64:BEHAVIOR_SCRIPT", std::make_shared<SM64::BehaviorScriptFactory>());
     this->RegisterFactory("SM64:COLLISION", std::make_shared<SM64::CollisionFactory>());
-    this->RegisterFactory("SM64:GEO_LAYOUT", std::make_shared<SM64::GeoLayoutFactory>());
+    // this->RegisterFactory("SM64:GEO_LAYOUT", std::make_shared<SM64::GeoLayoutFactory>());
     this->RegisterFactory("SM64:LEVEL_SCRIPT", std::make_shared<SM64::LevelScriptFactory>());
     this->RegisterFactory("SM64:MACRO", std::make_shared<SM64::MacroFactory>());
     this->RegisterFactory("SM64:MOVTEX_QUAD", std::make_shared<SM64::MovtexQuadFactory>());
@@ -200,6 +200,7 @@ std::optional<ParseResultData> Companion::ParseNode(YAML::Node& node, std::strin
 
     auto factory = this->GetFactory(type);
     if(!factory.has_value()){
+        return std::nullopt;
         throw std::runtime_error("No factory by the name '"+type+"' found for '"+name+"'");
     }
 
